@@ -1,64 +1,173 @@
+
 import java.util.*;
+
 public class BAI04 {
-    static int cau1(String str)
-    {
+
+    static int cau1(String str) {
         String[] brr = str.split("\\s+");
         int size = brr.length;
+        System.out.println("- Output");
         System.out.println(size);
         StringBuilder temp = new StringBuilder(str);
         temp.reverse();
         System.out.println(temp);
         return size;
     }
-    static void cau3()
-    {
-         System.out.println("* Two strings");
-         Scanner sc = new Scanner(System.in);
-         String str1 = sc.nextLine();
-         String str2 = sc.nextLine();
-         if(str1.indexOf(str2)==-1)
-         {
-             System.out.println("Substring not found in the string");
-         }
-         else 
-          System.out.println("Substring found at position "+str1.indexOf(str2)+" in the string");
-    }
-    static void cau2(String str)
-    {
-        String[] brr = str.split("\\s+");
-        System.out.println("- The third character "+brr[2]);
-    }
-    static void cau4(String str)
-    {
-        String[] brr = str.split("\\s+");
-        int tnumber=0;
-        int tna=0;
-        int tpa =0;
-        int tc =0;
-        for(int i=0;i<brr.length;i++)
-        {
-            if(brr[i].matches("\\d+")||brr[i].matches("(-?\\d+\\.\\d++)?"))
-                    {
-                        tnumber++;
-                    }
+
+    static void cau3() {
+        System.out.println("* Two strings");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("+ String 1");
+        String str1 = sc.nextLine();
+        System.out.println("+ String 2");
+        String str2 = sc.nextLine();
+        if (str1.indexOf(str2) == -1) {
+            System.out.println("- Substring not found in the string");
+        } else {
+            System.out.println("- Substring found at position " + str1.indexOf(str2) + " in the string");
         }
     }
-    public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
-         System.out.println("- Enter a string");
-         String str = sc.nextLine();
-         int kt = cau1(str);
-         if(kt>3)
-         {
-             cau2(str);
-         }
-         else
-         {
-             System.out.println("N/A");
-         }
-         cau3();
-         cau4(str);
-      
+
+    static void cau2(String str) {
+        String[] brr = str.split("\\s+");
+        System.out.println("- The third character " + brr[2]);
     }
-    
+
+    static void cau4(String str) {
+        String[] brr = str.split("\\s+");
+        int tnumber = 0;
+        int tna = 0;
+        int tpa = 0;
+        int tc = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                tnumber++;
+            } else if (str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i' || str.charAt(i) == 'o' || str.charAt(i) == 'u' || str.charAt(i) == 'A' || str.charAt(i) == 'E' || str.charAt(i) == 'I' || str.charAt(i) == 'O' || str.charAt(i) == 'U') {
+                tna++;
+            } else if (str.charAt(i) >= 'a' && str.charAt(i) < 'z' || str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
+                tpa++;
+            }
+        }
+        System.out.println("- The numeral characters :" + tnumber);
+        System.out.println("- The vowel characters " + tna);
+        System.out.println("- The consonant characters " + tpa);
+        System.out.println("- The special characters " + (str.length() - tna - tpa - tnumber - brr.length + 1));
+    }
+
+    static void cau5(String str) {
+        String[] brr = str.split("\\s+");
+        int count = 0;
+        for (int i = 0; i < brr.length; i++) {
+            int size = brr[i].length();
+            int dem = 0;
+            for (int j = 0; j < brr[i].length(); j++) {
+                if (brr[i].charAt(j) >= 'a' && brr[i].charAt(j) <= 'z' || brr[i].charAt(j) >= 'A' && brr[i].charAt(j) <= 'Z') {
+                    dem++;
+                }
+                if (dem == size) {
+                    count++;
+                }
+            }
+        }
+        System.out.println("- " + count + " words in the input string");
+    }
+
+    static void cau6(String str) {
+        System.out.print("- The lower-case letters of input string : ");
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z') {
+                System.out.print(str.charAt(i) + " ");
+            }
+        }
+    }
+
+    static void cau7(String str) {
+        System.out.print("\n- The upper-case letters of input string : ");
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
+                System.out.print(str.charAt(i) + " ");
+            }
+        }
+    }
+
+    static String removeChart(String str, int index) {
+        return str.substring(0, index) + str.substring(index + 1);
+    }
+
+    static void cau8(String str) {
+        String[] brr = str.split("\\s+");
+        System.out.print("\n- Replace letters that are identical and uninterrupted by one : ");
+        for (int i = 0; i < brr.length; i++) {
+            for (int j = 0; j < brr[i].length(); j++) {
+                for (int k = j + 1; k < brr[i].length(); k++) {
+                    if (brr[i].charAt(j) == brr[i].charAt(k)) {
+                        brr[i] = removeChart(brr[i], j);
+                    }
+                }
+            }
+            System.out.print(brr[i] + " ");
+        }
+    }
+
+    static void cau9() {
+        System.out.print("\n* Enter a string : ");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] brr = str.split("\\s+");
+        System.out.print("- A string then all remove unnecessary blanks :_");
+        for (int i = 0; i < brr.length; i++) {
+            if (i == brr.length - 1) {
+                System.out.print(brr[i] + "_");
+            } else {
+                System.out.print(brr[i] + " ");
+            }
+        }
+    }
+   static void cau11()
+   {
+       System.out.print("\n* Enter a string : ");
+       Scanner sc = new Scanner(System.in);
+       String str = sc.nextLine();
+       System.out.print("\n* Enter a number :");
+       int n =sc.nextInt();
+       System.out.print("\n- "+n+" letters from the right side of that string :"+str.substring(n));
+   }
+   static void cau12()
+   {
+       System.out.print("\n* Enter a string : ");
+       Scanner sc = new Scanner(System.in);
+       String str = sc.nextLine();
+       String result="";
+       String[] brr = str.split("\\s+");
+       for(int i=0;i<brr.length;i++)
+       {
+           String temp1 = brr[i].substring(0, 1);
+           String temp2 = brr[i].substring(1, brr[i].length());
+           temp1=temp1.toUpperCase();
+           result = result+temp1+temp2+" ";
+       }
+       System.out.println(result);
+   }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("* Enter a string");
+        String str = sc.nextLine();
+        int kt = cau1(str);
+        if (kt > 3) {
+            cau2(str);
+        } else {
+            System.out.println("N/A");
+        }
+        cau3();
+        cau4(str);
+        cau5(str);
+        cau6(str);
+        cau7(str);
+        cau8(str);
+        cau9();
+        cau11();
+        cau12();
+
+    }
+
 }
