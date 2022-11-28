@@ -90,23 +90,28 @@ public class BAI04 {
         }
     }
 
-    static String removeChart(String str, int index) {
-        return str.substring(0, index) + str.substring(index + 1);
-    }
-
-    static void cau8(String str) {
+    static String cau8(String str) {
         String[] brr = str.split("\\s+");
-        System.out.print("\n- Replace letters that are identical and uninterrupted by one : ");
+        String result = "";
+        boolean check;
         for (int i = 0; i < brr.length; i++) {
+            if (i > 0 && i < brr.length) {
+                result += " ";
+            }
             for (int j = 0; j < brr[i].length(); j++) {
-                for (int k = j + 1; k < brr[i].length(); k++) {
-                    if (brr[i].charAt(j) == brr[i].charAt(k)) {
-                        brr[i] = removeChart(brr[i], j);
+                check = false;
+                for (int jj = j + 1; jj < brr[i].length(); jj++) {
+                    if (brr[i].charAt(j) == brr[i].charAt(jj)) {
+                        check = true;
+                        break;
                     }
                 }
+                if (!check) {
+                    result += brr[i].charAt(j);
+                }
             }
-            System.out.print(brr[i] + " ");
         }
+        return result;
     }
 
     static void cau9() {
@@ -123,31 +128,74 @@ public class BAI04 {
             }
         }
     }
-   static void cau11()
-   {
-       System.out.print("\n* Enter a string : ");
-       Scanner sc = new Scanner(System.in);
-       String str = sc.nextLine();
-       System.out.print("\n* Enter a number :");
-       int n =sc.nextInt();
-       System.out.print("\n- "+n+" letters from the right side of that string :"+str.substring(n));
-   }
-   static void cau12()
-   {
-       System.out.print("\n* Enter a string : ");
-       Scanner sc = new Scanner(System.in);
-       String str = sc.nextLine();
-       String result="";
-       String[] brr = str.split("\\s+");
-       for(int i=0;i<brr.length;i++)
-       {
-           String temp1 = brr[i].substring(0, 1);
-           String temp2 = brr[i].substring(1, brr[i].length());
-           temp1=temp1.toUpperCase();
-           result = result+temp1+temp2+" ";
-       }
-       System.out.println(result);
-   }
+
+    static void cau11() {
+        System.out.print("\n* Enter a string : ");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        System.out.print("* Enter a number :");
+        int n = sc.nextInt();
+        System.out.print("- " + n + " letters from the right side of that string :" + str.substring(n));
+    }
+
+    static void cau10() {
+        System.out.println("*Enter string to count occurrences :");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String temp = cau8(str);
+        String str1 = str.toUpperCase();
+        String temp1 = temp.toUpperCase();
+        for (int i = 0; i < temp.length(); i++) {
+            int count = 0;
+            if (temp.charAt(i) != ' ') {
+                for (int j = 0; j < str.length(); j++) {
+                    if (temp1.charAt(i) == str1.charAt(j)) {
+                        count++;
+                    }
+                }
+                System.out.println(temp.charAt(i) + " appear " + count + " times");
+            }
+        }
+    }
+
+    static void cau12() {
+        System.out.print("\n* Enter a string : ");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String result = "";
+        String[] brr = str.split("\\s+");
+        for (int i = 0; i < brr.length; i++) {
+            String temp1 = brr[i].substring(0, 1);
+            String temp2 = brr[i].substring(1, brr[i].length());
+            temp1 = temp1.toUpperCase();
+            result = result + temp1 + temp2 + " ";
+        }
+        System.out.println(result);
+    }
+
+    static void cau13() {
+        System.out.println("* English Name like string");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] token = str.split("\\s+");
+        System.out.print(token[token.length - 1] + " ");
+        System.out.print(token[0] + " ");
+        for (int i = 1; i < token.length - 1; i++) {
+            System.out.print(token[i] + " ");
+        }
+    }
+
+    static void cau14() {
+        System.out.println("\n* Reverse an input by each word");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] token = str.split("\\s+");
+        for (int i = token.length - 1; i >= 0; i--) {
+            System.out.print(token[i] + " ");
+        }
+
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("* Enter a string");
@@ -158,15 +206,18 @@ public class BAI04 {
         } else {
             System.out.println("N/A");
         }
-        cau3();
-        cau4(str);
-        cau5(str);
-        cau6(str);
-        cau7(str);
-        cau8(str);
-        cau9();
-        cau11();
-        cau12();
+        cau3();  // check có xâu con k?
+        cau4(str); //có bao nhiêu kí tự số, nguyên âm, phụ âm, kí tự đặc biệt
+        cau5(str);  // đếm số từ trong input
+        cau6(str); // in ra chữ thường trong input
+        cau7(str); // in chữ hoa trong input
+        System.out.print("\n- Replace letters that are identical and uninterrupted by one : " + cau8(str)); // thay thế các chữ cái giống nhau trong từ thành 1
+        cau9();  // loại bỏ khoảng trống trong chuỗi
+        cau10();  // đến số lần xuất hiện của chữ cái
+        cau11();  // xuất n chữ bên phải của chuỗi
+        cau12(); // chuyển đổi chữ hoa tiêu đề
+        cau13(); // chuyen ten giong tieng anh
+        cau14(); // dao nguoc dau vao theo từ
 
     }
 
